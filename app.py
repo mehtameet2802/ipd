@@ -2,12 +2,22 @@
 # A very simple Flask Hello World app for you to get started with...
 
 from flask import Flask
+from flask import Flask, jsonify, request
+from fastapi import FastAPI
+import numpy as np
+import pandas as pd
+import pickle
+import bz2file as bz2
+
+
+def decompress_pickle(file):
+    data = bz2.BZ2File(file, "rb")
+    data = pickle.load(data)
+    return data
+
 
 app = Flask(__name__)
-<<<<<<< HEAD
-=======
-pickle_in = open("CropRecommendation.pkl", "rb")
-recommender = pickle.load(pickle_in)
+
 recommender = decompress_pickle("Recommendation.pbz2")
 
 
@@ -32,9 +42,12 @@ def predict_crop():
                                              sodium, iron, zinc, temperature, humidity, ph, rainfall]])
     print(f"prediction = {recommended_crop}")
     return jsonify(recommended_crop=recommended_crop[0])
->>>>>>> 1dd12522585390b08a40fe45578b17dd0ada5e2f
+
 
 @app.route('/')
 def hello_world():
     return 'Hello from Flask!'
 
+
+if __name__ == '__main__':
+    app.run(debug=True)
