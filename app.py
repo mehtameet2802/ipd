@@ -4,11 +4,21 @@ from soilAttributes import SoilData
 import numpy as np
 import pandas as pd
 import pickle
+import bz2file as bz2
+
+
+def decompress_pickle(file):
+    data = bz2.BZ2File(file, "rb")
+    data = pickle.load(data)
+    return data
 
 
 app = FastAPI()
 pickle_in = open("CropRecommendation.pkl", "rb")
 recommender = pickle.load(pickle_in)
+recommender = decompress_pickle("Recommendation.pbz2")
+# data = bz2.BZ2File("Recommendation.pbz2", "rb")
+# recommender = pickle.load(model)
 
 
 @app.get('/')
