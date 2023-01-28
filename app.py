@@ -18,7 +18,7 @@ recommender = pickle.load(pickle_in)
 recommender = decompress_pickle("Recommendation.pbz2")
 
 
-@app.route("/check", methods=['GET'])
+@app.route("/check")
 def index():
     return 'Hello, World. Website is working'
 
