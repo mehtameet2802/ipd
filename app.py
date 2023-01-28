@@ -18,12 +18,12 @@ recommender = pickle.load(pickle_in)
 recommender = decompress_pickle("Recommendation.pbz2")
 
 
-@app.route('/', methods=['GET'])
+@app.route("/check", methods=['GET'])
 def index():
-    return 'Hello, World'
+    return 'Hello, World. Website is working'
 
 
-@app.route('/predict', methods=['POST'])
+@app.route("/predict", methods=['POST'])
 def predict_crop():
     nitrogen = float(request.form['nitrogen'])
     phosphorus = float(request.form['phosphorus'])
