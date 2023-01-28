@@ -1,9 +1,9 @@
-from flask import Flask, jsonify, request
-from fastapi import FastAPI
+import flask
 import numpy as np
 import pandas as pd
 import pickle
 import bz2file as bz2
+from flask import Flask, jsonify, request
 
 
 def decompress_pickle(file):
