@@ -33,7 +33,7 @@ def main():
         recommended_crop = recommender.predict([[nitrogen, phosphorus, potassium,
                                                  sodium, iron, zinc, temperature, humidity, ph, rainfall]])
     print(f"prediction = {recommended_crop}")
-    st.success(recommended_crop[0])
+    st.success(recommended_crop)
 
 
 if __name__ == '__main__':
