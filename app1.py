@@ -1,11 +1,9 @@
 
 # A very simple Flask Hello World app for you to get started with...
 
-from flask import Flask, jsonify, request
-import numpy as np
-import pandas as pd
 import pickle
 import bz2file as bz2
+import streamlit as st
 
 
 def decompress_pickle(file):
@@ -14,32 +12,28 @@ def decompress_pickle(file):
     return data
 
 
-app = Flask(__name__)
-
 recommender = decompress_pickle("Recommendation.pbz2")
 
 
-@app.route("/check")
-def index():
-    return 'Hello, World. Website is working'
+def main():
+    st.title('Crop Recommendation')
+    nitrogen = float(st.number_input('nitrogen'))
+    phosphorus = float(st.number_input('phosphorus'))
+    potassium = float(st.number_input('potassium'))
+    sodium = float(st.number_input('sodium'))
+    iron = float(st.number_input('iron'))
+    zinc = float(st.number_input('zinc'))
+    temperature = float(st.number_input('temperature'))
+    humidity = float(st.number_input('humidity'))
+    ph = float(st.number_input('ph'))
+    rainfall = float(st.number_input('rainfall'))
 
-
-@app.route("/predict", methods=['POST'])
-def predict_crop():
-    nitrogen = float(request.form['nitrogen'])
-    phosphorus = float(request.form['phosphorus'])
-    potassium = float(request.form['potassium'])
-    sodium = float(request.form['sodium'])
-    iron = float(request.form['iron'])
-    zinc = float(request.form['zinc'])
-    temperature = float(request.form['temperature'])
-    humidity = float(request.form['humidity'])
-    ph = float(request.form['ph'])
-    rainfall = float(request.form['rainfall'])
-    recommended_crop = recommender.predict([[nitrogen, phosphorus, potassium,
-                                             sodium, iron, zinc, temperature, humidity, ph, rainfall]])
+    recommended_crop = ''
+    if st.button('Predict Crop'):
+        recommended_crop = recommender.predict([[nitrogen, phosphorus, potassium,
+                                                 sodium, iron, zinc, temperature, humidity, ph, rainfall]])
     print(f"prediction = {recommended_crop}")
-    return jsonify(recommended_crop=recommended_crop[0])
+    st.success(recommended_crop[0])
 
 
 @app.route('/')
@@ -48,4 +42,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
