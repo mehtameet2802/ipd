@@ -2,8 +2,6 @@
 # A very simple Flask Hello World app for you to get started with...
 
 from flask import Flask, jsonify, request
-import numpy as np
-import pandas as pd
 import pickle
 import bz2file as bz2
 
