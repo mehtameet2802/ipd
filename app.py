@@ -1,9 +1,7 @@
 
 # A very simple Flask Hello World app for you to get started with...
 
-from flask import Flask
 from flask import Flask, jsonify, request
-from fastapi import FastAPI
 import numpy as np
 import pandas as pd
 import pickle
